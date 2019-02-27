@@ -6,24 +6,24 @@ import films from '.././helpers/filmsData';
   render() { 
     data={films}
      const film = this.props.film;
-      console.log(this.props);
-      console.log(film.title);
+      //console.log(this.props);
+      console.log(film.id);
     return (
       <View style={styles.main_container}>
-      <View  style={{ flex: 1, backgroundColor: 'yellow',borderWidth:3 }}>
+      <View  style={{ flex: 1,borderWidth:3 }}>
       <Image style={styles.image} source={{uri: "image"}}/>
       </View>
-      <View  style={{ flex: 2, backgroundColor: 'red',flexDirection: 'column' }}>
-      <View style={{flex:1,backgroundColor:'green',borderWidth:2,flexDirection: 'row'}}>
-      <Text style={styles.title_text}>{film.title}</Text>
-      <View style={{ backgroundColor:'orange',height: 50,width: 50, fontWeight: 'bold'}}>
-      <Text>note de vote : {film.vote_average}</Text></View>
+      <View  style={{ flex: 2,flexDirection: 'column' }}>
+      <View style={{flex:1,borderWidth:2,flexDirection: 'row',paddingRight: 5}}>
+      <Text style={styles.title_text} numberOfLines={2}>{film.title}</Text>
+      
+      <Text style={styles.vote_text}>  vote: {film.vote_average}</Text>
       </View>
       <View style={{flex:2 ,borderWidth:2}}>
-      <Text style={styles.title_text} numberOfLines={5}>{film.overview}</Text>
+      <Text style={styles.discrip_text} numberOfLines={5}>{film.overview}</Text>
       </View>
-      <View style={{flex:1,borderWidth:2,backgroundColor:'#EE82EE'}}>
-      <Text style={styles.title_text}>sorti le:{film.release_date}</Text>
+      <View style={{flex:1,borderWidth:2}}>
+      <Text >sorti le: {film.release_date}</Text>
       </View>
         </View>
       </View>
@@ -34,10 +34,37 @@ const styles = StyleSheet.create({
   main_container:{
     flexDirection: 'row',
     height:200,
-   
   },
-  title_text:{
-    
-  }
+  
+  title_text: {
+
+    fontWeight: 'bold',
+
+    fontSize: 15,
+
+    flex: 1,
+
+    flexWrap: 'wrap',
+
+    paddingRight: 5
+  },
+  vote_text: {
+
+    fontWeight: 'bold',
+
+    fontSize: 26,
+
+    color: '#666666'
+
+  },
+  discrip_text: {
+
+    fontWeight: 'bold',
+
+    fontSize: 13,
+
+    color: '#666666'
+
+  },
 })
 export default FilmItems
