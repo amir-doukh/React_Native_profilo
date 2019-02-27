@@ -1,13 +1,22 @@
 import React from 'react';
-import { View,TextInput ,Button,StyleSheet,FlatList} from 'react-native';
+import { View,TextInput ,Button,StyleSheet,FlatList,Vibration} from 'react-native';
 import films from './helpers/filmsData';
 import FilmItems from './componants/filmItems';
+
+const DURATION = 10000;
+const PATTERN = [1000, 2000, 3000];
+
+
 export default class App extends React.Component {
+
+  StartVibration(){
+Vibration.vibrate(PATTERN);
+  }
   render() {
     return (
       <View style={styles.main_container}>
         <TextInput style={StyleSheet.textinput} placeholder="entrer votre nom" ></TextInput>
-        <Button title="recherche" onPress={() => {}}> </Button>
+        <Button title="recherche" onPress={this.StartVibration}> </Button>
         <FlatList
 
   data={films}
