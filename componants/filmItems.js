@@ -10,19 +10,19 @@ import films from '.././helpers/filmsData';
       console.log(film.id);
     return (
       <View style={styles.main_container}>
-      <View  style={{ flex: 1,borderWidth:3 }}>
+      <View  style={{ flex: 1 }}>
       <Image style={styles.image} source={{uri: "image"}}/>
       </View>
       <View  style={{ flex: 2,flexDirection: 'column' }}>
-      <View style={{flex:1,borderWidth:2,flexDirection: 'row',paddingRight: 5}}>
+      <View style={{flex:1,flexDirection: 'row',paddingRight: 5}}>
       <Text style={styles.title_text} numberOfLines={2}>{film.title}</Text>
       
       <Text style={styles.vote_text}>  vote: {film.vote_average}</Text>
       </View>
-      <View style={{flex:2 ,borderWidth:2}}>
+      <View style={{flex:2 }}>
       <Text style={styles.discrip_text} numberOfLines={5}>{film.overview}</Text>
       </View>
-      <View style={{flex:1,borderWidth:2}}>
+      <View style={{flex:1,}}>
       <Text >sorti le: {film.release_date}</Text>
       </View>
         </View>
@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
   main_container:{
     flexDirection: 'row',
     height:200,
+    
+  },
+  image:{
+    width: 100,
+    height: 180,
+    margin:5,
+backgroundColor:'gray'
   },
   
   title_text: {
