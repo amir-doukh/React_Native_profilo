@@ -23,7 +23,7 @@ import films from '.././helpers/filmsData';
       <Text style={styles.title_text} numberOfLines={5}>{film.overview}</Text>
       </View>
       <View style={{flex:1,borderWidth:2,backgroundColor:'#EE82EE'}}>
-      <Text style={styles.title_text}>sorti le: {film.release_date}</Text>
+      <Text style={styles.title_text}>sorti le:{film.release_date}</Text>
       </View>
         </View>
       </View>
