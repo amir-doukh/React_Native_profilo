@@ -11,23 +11,29 @@ export default class App extends React.Component {
   constructor(props){
     super(props)
   
-  this.state = { films: [] }
-
+  this.state = { films: [],
+   
+}
+this.searchText="" 
   }
 
   StartVibration(){
 Vibration.vibrate(DURATION);
   }
   loadFilm(){
-     getFilms("star").then(data =>this.setState({ films: data.results }));
+    if(this.searchText.length>0){
+     getFilms(this.searchText).then(data =>this.setState({ films: data.results }));}
     Vibration.vibrate(PATTERN);
-    console.log(data);
+    console.log(this.searchText);
+  }
+  searchTexttnput(text){
+    this.searchText=text
   }
   render() {
     console.log("RENDER");
     return (
       <View style={styles.main_container}>
-        <TextInput style={StyleSheet.textinput} placeholder="entrer votre nom" ></TextInput>
+        <TextInput onChangeText={(text) => this.searchTexttnput(text)} style={StyleSheet.textinput} placeholder="entrer votre nom" ></TextInput>
         <Button title="recherche" onPress={()=>this.loadFilm()}> </Button>
         <FlatList
 
