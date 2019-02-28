@@ -4,7 +4,7 @@ import { View,StyleSheet,Text,Image} from 'react-native';
 import films from '.././helpers/filmsData';
  class FilmItems extends React.Component {
   render() { 
-    data={films}
+   // data={films}
      const film = this.props.film;
       //console.log(this.props);
       console.log(film.id);
