@@ -1,34 +1,37 @@
 import React from 'react';
 import { View,TextInput ,Button,StyleSheet,FlatList,Vibration,CameraRoll,ScrollView} from 'react-native';
-//import films from './helpers/filmsData';
+import films from './helpers/filmsData';
 import FilmItems from './componants/filmItems';
 import { getFilms} from './API/TMDB'
-const DURATION = 10000;
+const DURATION = 500;
 const PATTERN = [1000, 2000, 3000];
 
 
 export default class App extends React.Component {
   constructor(props){
     super(props)
-  this.state = { Films: [] }
+  
+  this.state = { films: [] }
+
   }
 
   StartVibration(){
-Vibration.vibrate(PATTERN);
+Vibration.vibrate(DURATION);
   }
   loadFilm(){
-     getFilms("star").then(data => console.log(data));
+     getFilms("star").then(data =>this.setState({ films: data.results }));
     Vibration.vibrate(PATTERN);
     console.log(data);
   }
   render() {
+    console.log("RENDER");
     return (
       <View style={styles.main_container}>
         <TextInput style={StyleSheet.textinput} placeholder="entrer votre nom" ></TextInput>
         <Button title="recherche" onPress={()=>this.loadFilm()}> </Button>
         <FlatList
 
-  data={this.state.Films}
+  data={this.state.films}
   
   keyExtractor={(item) => item.id.toString()}
 
