@@ -10,18 +10,16 @@ const PATTERN = [1000, 2000, 3000];
 export default class App extends React.Component {
   constructor(props){
     super(props)
-    
   this.state = { Films: [] }
-    this.data=null;
   }
 
   StartVibration(){
 Vibration.vibrate(PATTERN);
   }
   loadFilm(){
-     getFilms("star").then(data => console.log(data) );
+     getFilms("star").then(data => console.log(data));
     Vibration.vibrate(PATTERN);
-    //console.log(this.Films);
+    console.log(data);
   }
   render() {
     return (
@@ -31,7 +29,7 @@ Vibration.vibrate(PATTERN);
         <FlatList
 
   data={this.state.Films}
-
+  
   keyExtractor={(item) => item.id.toString()}
 
   renderItem={({item}) => <FilmItems film={item}/>}
