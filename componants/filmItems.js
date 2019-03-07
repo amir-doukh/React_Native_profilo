@@ -7,11 +7,11 @@ import films from '.././helpers/filmsData';
    // data={films}
      const film = this.props.film;
       //console.log(this.props);
-      console.log(film.id);
+      //console.log(film.id);
     return (
       <View style={styles.main_container}>
       <View  style={{ flex: 1 }}>
-      <Image style={styles.image} source={{uri: "image"}}/>
+      <Image style={styles.image} source={{url: "image"}}/>
       </View>
       <View  style={{ flex: 2,flexDirection: 'column' }}>
       <View style={{flex:1,flexDirection: 'row',paddingRight: 5}}>

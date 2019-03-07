@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,TextInput ,Button,StyleSheet,FlatList,Vibration,CameraRoll,ScrollView} from 'react-native';
+import { View,TextInput ,Button,StyleSheet,FlatList,Vibration,ActivityIndicator} from 'react-native';
 import films from './helpers/filmsData';
 import FilmItems from './componants/filmItems';
 import { getFilms} from './API/TMDB'
@@ -12,30 +12,49 @@ export default class App extends React.Component {
     super(props)
   
   this.state = { films: [],
-   
-}
+   isLoading:false
+   }
 this.searchText="" 
   }
-
+  //a tester componentWillMount pour le get de API
+  
   StartVibration(){
 Vibration.vibrate(DURATION);
   }
-  loadFilm(){
-    if(this.searchText.length>0){
-     getFilms(this.searchText).then(data =>this.setState({ films: data.results }));}
-    Vibration.vibrate(PATTERN);
-    console.log(this.searchText);
+  displayLoading(){
+    if(this.state.isLoading){
+      return (
+    <View style={styles.loading_container}>
+      <ActivityIndicator size='large'/>
+    </View>
+      ) 
+    }
   }
-  searchTexttnput(text){
+  loadFilm(){
+    this.setState({ isLoading:true})
+    if(this.searchText.length>0){
+     getFilms(this.searchText).then(data => 
+       this.setState({ 
+        films: data,
+       isLoading:false})
+      
+         )
+        
+     }
+    Vibration.vibrate(PATTERN);
+   
+  }
+  searchTextinput(text){
     this.searchText=text
   }
   render() {
-    console.log("RENDER");
+    //console.log(this.state.isLoading);
     return (
       <View style={styles.main_container}>
-        <TextInput onChangeText={(text) => this.searchTexttnput(text)} style={StyleSheet.textinput} placeholder="entrer votre nom" ></TextInput>
+        <TextInput onChangeText={(text) => this.searchTextinput(text)} style={StyleSheet.textinput} placeholder="entrer le nom du film ;)" ></TextInput>
         <Button title="recherche" onPress={()=>this.loadFilm()}> </Button>
         <FlatList
+
 
   data={this.state.films}
   
@@ -44,7 +63,7 @@ Vibration.vibrate(DURATION);
   renderItem={({item}) => <FilmItems film={item}/>}
 
 />
-
+{this.displayLoading()}
       </View>
       
     )
@@ -62,5 +81,14 @@ const styles = StyleSheet.create({
     borderColor:'#000000',
     paddingLeft:10 ,
     borderWidth:3
+  },
+  loading_container: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 100,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
