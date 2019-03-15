@@ -1,8 +1,11 @@
 import React from 'react';
-import { View,TextInput ,Button,StyleSheet,FlatList,Vibration,ActivityIndicator} from 'react-native';
+import {Animated, View,StatusBar,Button,Text, Picker,TextInput ,StyleSheet,FlatList,Vibration,ActivityIndicator,Modal,TouchableHighlight} from 'react-native';
 import films from './helpers/filmsData';
+import { Container, Header, Title, Content, Footer, FooterTab,  Left, Right, Body, Icon } from 'native-base';
 import FilmItems from './componants/filmItems';
-import { getFilms} from './API/TMDB'
+import { getFilms} from './API/TMDB';
+import FadeInView  from './API/Animationn';
+
 const DURATION = 500;
 const PATTERN = [1000, 2000, 3000];
 
@@ -12,7 +15,8 @@ export default class App extends React.Component {
     super(props)
   
   this.state = { films: [],
-   isLoading:false
+  // isLoading:false
+  modalVisible: false,
    }
 this.searchText="" 
   }
@@ -32,27 +36,66 @@ Vibration.vibrate(DURATION);
   }
   loadFilm(){
     this.setState({ isLoading:true})
+    console.log(this.searchText.length)
     if(this.searchText.length>0){
      getFilms(this.searchText).then(data => 
        this.setState({ 
-        films: data,
-       isLoading:false})
-      
+        films: data.results,
+       //isLoading:false
+      })
          )
-        
+        console.log(data)
      }
     Vibration.vibrate(PATTERN);
-   
+  }
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
   searchTextinput(text){
     this.searchText=text
   }
   render() {
-    //console.log(this.state.isLoading);
+    console.log(this.state.isLoading);
     return (
+      
       <View style={styles.main_container}>
+      
+      <Picker style={styles.picker}>
+  <Picker.item label="5" value={5}/>
+  <Picker.item label="10" value={10} />
+</Picker>
         <TextInput onChangeText={(text) => this.searchTextinput(text)} style={StyleSheet.textinput} placeholder="entrer le nom du film ;)" ></TextInput>
         <Button title="recherche" onPress={()=>this.loadFilm()}> </Button>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={{marginTop: 22}}>
+            <View>
+            <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>start animation :p</Text>
+        </FadeInView>
+  <View>
+   
+  </View>
+              <Text>modal view</Text>
+
+              <TouchableHighlight onPress={() => {this.setModalVisible(!this.state.modalVisible);}}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableHighlight
+          onPress={() => {
+            this.setModalVisible(true);
+          }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
         <FlatList
 
 
@@ -63,7 +106,9 @@ Vibration.vibrate(DURATION);
   renderItem={({item}) => <FilmItems film={item}/>}
 
 />
+
 {this.displayLoading()}
+
       </View>
       
     )
@@ -90,5 +135,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  picker:{
+    justifyContent:'center',
+     
+    alignItems:'center'
   }
 })
