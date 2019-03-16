@@ -1,12 +1,12 @@
-import React from 'react';
+/*
+import {Navigation} from "react-native-navigation";
 import {Animated, View,StatusBar,Button,Text, Picker,TextInput ,StyleSheet,FlatList,Vibration,ActivityIndicator,Modal,TouchableHighlight} from 'react-native';
 import films from './helpers/filmsData';
 import { Container, Header, Title, Content, Footer, FooterTab,  Left, Right, Body, Icon } from 'native-base';
 import FilmItems from './componants/filmItems';
 import { getFilms} from './API/TMDB';
-import FadeInView  from './API/Animationn';
-
-const DURATION = 500;
+import FadeInView  from './API/Animationn';*/
+/*const DURATION = 500;
 const PATTERN = [1000, 2000, 3000];
 
 
@@ -141,4 +141,23 @@ const styles = StyleSheet.create({
      
     alignItems:'center'
   }
-})
+})*/
+import React from 'react';
+import Home from "./screens/ScreensList/MenuList";
+import Profil from "./screens/ScreensList/Profil";
+
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+const MainNavigator = createStackNavigator({
+  Home: {screen: HomeScreen},
+  Profil: {screen: ProfileScreen},
+});
+
+class App extends React.Component{
+render(){
+  return(
+<MainNavigator/>
+  )}}
+export default App;
+
+
+
