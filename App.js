@@ -148,10 +148,9 @@ import Profil from "./screens/ScreensList/Profil";
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
-  Profil: {screen: ProfileScreen},
-});
-
+  Home: {screen: Home},
+  Profil: {screen: Profil},
+})
 class App extends React.Component{
 render(){
   return(
