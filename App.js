@@ -61,7 +61,8 @@ Vibration.vibrate(DURATION);
   subscribeToTimer(cb) {
     socket.on('timer', timestamp => cb(null, timestamp));
     socket.emit('subscribeToTimer', 1000);
-  console.log("request sended");}
+  console.log("request sended");
+console.log(socket);}
   render() {
     console.log(this.state.isLoading);
     return (
